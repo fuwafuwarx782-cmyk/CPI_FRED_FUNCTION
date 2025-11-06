@@ -5,10 +5,10 @@ from datetime import datetime, timedelta
 
 FRED_API_KEY = os.environ.get("FRED_API_KEY") 
 
-def get_cpi_from_fred():
+def get_us_core_cpi_from_fred():
     
     today = datetime.now()
-    start_date = (today - timedelta(days=365)).strftime("%Y-%m-%d")
+    start_date = (today - timedelta(days=420)).strftime("%Y-%m-%d")
     
     SERIES_CORE = {
         "core_cpi": "CPILFENS"
