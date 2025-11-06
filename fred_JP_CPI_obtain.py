@@ -1,4 +1,4 @@
-#CPIを取得するためだけの関数
+#CPIを取得するためだけの関数。
 import requests
 import os
 from datetime import datetime, timedelta

@@ -1,4 +1,4 @@
-#アメリカのコアCPIを取得するためだけの関数
+#アメリカのコアCPIを取得するためだけの関数。
 import requests
 import os
 from datetime import datetime, timedelta
