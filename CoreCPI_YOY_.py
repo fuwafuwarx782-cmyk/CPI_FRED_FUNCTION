@@ -1,7 +1,7 @@
 from typing import Dict, Any, List
 from datetime import datetime, timedelta
 
-def calculate_yoy_inflation_rate(index_series: Dict[str, float]):
+def CoreCPI_YOY(index_series: Dict[str, float]):
     
     sorted_dates = sorted(index_series.keys())
     
