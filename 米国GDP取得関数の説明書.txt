@@ -1,0 +1,53 @@
+import分は省略
+
+変数FRED_API_KEYにosモジュールのenvironオブジェクトのgetメソッドで引数に環境変数FRED_API_KEYを受け取る。
+
+関数get_data_from_fredは引数に変数series_configを辞書型で受け取る
+
+
+
+関数定義
+
+変数todayに代入datetimeオブジェクトのnowメソッドで現在日時を取得
+
+変数start_dateに代入　今の日時-期間timedeltaオブジェクトの18500日=の数値をメソッドstrftimeで整形。
+
+変数SERIES_COREに辞書　キーcore_cpi　値CPILFENSを作成し代入
+
+変数fetched_dataに辞書型indics:値も辞書　で入れ子に作成し代入
+
+変数fred_urlにAPIのエンドポイントを代入
+
+for文で辞書型の変数キーkeyと値series_idに辞書型のオブジェクトSERIES_COREからitemsメソッドでキーと値をセットにして代入。以下try:とexceptを辞書の中身が尽きるまでループ
+
+変数paramsに代入　辞書キーと値5つ　省略
+
+
+
+tryブロック
+
+response変数にrequestsレイヤーのgetメソッドで通信結果を代入。引数fred_urlとparamsを使用
+
+responseオブジェクトのraise_for_statusメソッドで例外であればexceptブロックへ
+
+変数dataへresponseオブジェクトのjsonメソッドでjsonに変換し代入
+
+辞書fetched_dataはキーindicesの値の辞書キーkeyを呼び出し値として空の辞書を代入
+
+for文で変数obsに辞書dataオブジェクトのgetメソッドで、辞書paramsのキーobservationsの値であるリスト（辞書型が入っている）を取得し代入。
+
+変数dataに辞書obsが受け取ったリストの中にある辞書キーdateの値を変数dateに代入。
+
+valueにも同じことをする。
+
+もし変数valueの中身がドットじゃなければ辞書fetched_dataのキーindicesのキーkeyのキーdateの値にfloat型の変数valueを代入
+
+exceptブロック
+
+requestsレイヤーのexceptionsモジュールのRequestsExceptionクラスで作成したeオブジェクト
+
+デバッグ用にprintでseries_idとeをログに残す
+
+raiseで例外発生
+
+戻り値は辞書fetched_data

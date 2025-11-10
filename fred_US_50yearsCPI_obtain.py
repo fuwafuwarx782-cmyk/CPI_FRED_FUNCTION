@@ -1,22 +1,17 @@
-#CPIを取得するためだけの関数。
+#アメリカのコアCPIを取得するためだけの関数
 import requests
 import os
 from datetime import datetime, timedelta
 
 FRED_API_KEY = os.environ.get("FRED_API_KEY") 
-SERIES_ALL = "JPNCPICONS"        # 総合指数
-SERIES_FOOD = "JPNCPCFOOD"       # 食料指数
-SERIES_ENERGY = "JPNCPCENRG"     # エネルギー指数
 
-def get_cpi_from_fred():
+def get_us_core_cpi_from_fred():
     
     today = datetime.now()
-    start_date = (today - timedelta(days=365)).strftime("%Y-%m-%d")
+    start_date = (today - timedelta(days=18500)).strftime("%Y-%m-%d")
     
-    all_series_map = {
-        "all": SERIES_ALL, 
-        "food": SERIES_FOOD, 
-        "energy": SERIES_ENERGY
+    SERIES_CORE = {
+        "core_cpi": "CPILFENS"
     }
     
     fetched_data = { #ここに辞書型でデータを入れる
@@ -25,7 +20,7 @@ def get_cpi_from_fred():
     
     fred_url = "https://api.stlouisfed.org/fred/series/observations"
     
-    for key, series_id in all_series_map.items():
+    for key, series_id in SERIES_CORE.items():
         params = {
             "series_id": series_id,
             "api_key": FRED_API_KEY,
