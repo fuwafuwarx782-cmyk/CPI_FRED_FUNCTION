@@ -5,10 +5,9 @@ import collections
 def RealGDP_YOY(index_series: Dict[str, float]):
     
     #index_seriesはハンドラ関数でfetched_dataの日付と値を代入する変数
-    sorted_dates = sorted(index_series.keys())
-    
     yoy_rates_list = []
-    
+
+    sorted_dates = sorted(index_series.keys())
     for current_date_str in sorted_dates:
         current_value = index_series[current_date_str]
 

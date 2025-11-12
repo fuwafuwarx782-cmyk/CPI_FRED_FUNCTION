@@ -1,0 +1,32 @@
+    RealGDP_YOY関数を定義する。受け取る引数は辞書型index_seriesでキーが文字列、値が数値。
+
+    いつもの辞書型のキーを並び替えて、キー順に各値を取り出してリストに収納するfor文。
+
+    最終的に返す予定のyoy_rates_listを作成
+
+    datetimeモジュールのstrptimeメソッドで指定の日付の形式にリストの値を整形して
+    current_dateオブジェクトに代入する
+
+    変数yoy_rateを初期化
+
+    tryブロック
+    変数laxt_year_date_objに代入、current_dateオブジェクトのreplaceメソッドに
+    引数に変数year＝リストcurrent_dateのyearから1を引いたものを渡し、cuurent_dateリストを置き換えて作成する
+
+    last_year_date_str変数に代入、
+    last_year_date_objオブジェクトをstrftimeメソッドで指定の形式に整形する。
+
+    exceptブロック※うるう年用
+    last_year_date_str変数に代入、
+    current_dateからtimedeltaクラスでdays=365を引き、strftimeクラスで日付に整形
+
+    last_year_value変数にindex_seriesオブジェクトの
+    getメソッドで引数を年月日のキーとし、対応する値を取り出す
+
+    もしlast_year_valueが存在し、かつlast_year_valueが0ではないなら、
+    変数yoy_rateに前年同月比の伸び率を％値で代入する。
+
+    リストyoy_ratesA_listにメソッドappendで追加※要素は辞書型
+    欠損していたらNoneを入れる。
+
+    yoy_rates_listを返す

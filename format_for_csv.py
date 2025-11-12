@@ -4,7 +4,7 @@ import csv
 from io import StringIO 
 from datetime import datetime
 
-def format_for_s3_csv(index_series: Dict[str, float], series_name: str):
+def format_for_csv(index_series: Dict[str, float], series_name: str):
 
     fieldnames = [
         'series_key',  # STRING: データの種類を識別するためのキー
