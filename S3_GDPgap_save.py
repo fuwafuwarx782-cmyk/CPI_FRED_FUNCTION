@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 S3_BUCKET_NAME = os.environ.get("S3_BUCKET_NAME")
-S3_PREFIX = "適宜変える" #プレフィックスはデータを取得する辞書のキーかつフォルダみたいなもの
+S3_PREFIX = "gdp_gap" #プレフィックスはデータを取得する辞書のキーかつフォルダみたいなもの
 
 def S3_common_save(csv_string: str, file_name: str):
 

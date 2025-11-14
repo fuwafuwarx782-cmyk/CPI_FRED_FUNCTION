@@ -12,7 +12,7 @@ import分は省略
 
 変数start_dateに代入　今の日時-期間timedeltaオブジェクトの18500日=の数値をメソッドstrftimeで整形。
 
-変数SERIES_COREに辞書　キーcore_cpi　値CPILFENSを作成し代入
+キーと値に入れる内容だけ変えればほかのAPIも取得できるように辞書型を改良
 
 変数fetched_dataに辞書型indics:値も辞書　で入れ子に作成し代入
 
