@@ -6,7 +6,7 @@ from typing import Dict, Any
 FRED_API_KEY = os.environ.get("FRED_API_KEY") 
 
 SERIES_CORE = {
-    "official_gdp_gap": "OUTGAP" 
+    "official_gdp_gap": "GDPPOT" 
 }
 
 def get_data_from_fred(series_config: dict = None) -> Dict[str, Any]:
