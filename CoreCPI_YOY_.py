@@ -5,7 +5,7 @@ def CoreCPI_YOY(index_series: Dict[str, float]):
     
     sorted_dates = sorted(index_series.keys())
     
-    yoy_rates_list = [] #ここに保存する
+    yoy_rates_dict = {} #ここに保存する
     
     for current_date_str in sorted_dates:
         current_index = index_series[current_date_str]
@@ -21,9 +21,7 @@ def CoreCPI_YOY(index_series: Dict[str, float]):
             # YoY = (当月指数 / 前年同月指数 - 1) * 100
             yoy_rate = (current_index / last_year_index - 1) * 100
         
-        yoy_rates_list.append({
-            "date": current_date_str,
-            "index": current_index,
-            "yoy_rate": round(yoy_rate, 2) if yoy_rate is not None else None,
-        })
-    return yoy_rates_list
+        if yoy_rate is not None:
+            yoy_rates_dict[current_date_str] = round(yoy_rate, 2)
+            
+    return yoy_rates_dict # 辞書を返す
