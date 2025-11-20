@@ -1,0 +1,65 @@
+ファイル名のフォーマットは正規表現で設定
+フォーマットが正しい場合はgenkoukanri-test2へ
+間違っている場合はgenkoukanri-test3へ移動
+
+boto3モジュールのclientメソッドでS3につなげる
+
+ハンドラ関数
+環境変数の設定ミス検知
+
+関数の引数を確認
+bucket = event['Records'][0]['s3']['bucket']['name']
+辞書eventキーの値に入っている
+辞書recordsキーの値であるリストの
+最初の要素　辞書s3キーの値に入っている
+辞書bucketキーの値に入っている
+辞書nameキーの値を
+変数bucketへ代入
+
+※ハンドラ関数が受け取る引数の辞書eventの値records辞書キーの値はいつもリスト
+
+urllib.parseモジュールのunquote_plusメソッドは
+S3のファイル名に含まれる日本語や特殊文字がURL形式に変換されている場合に
+人間が読めるもとの文字へ戻してくれる。
+
+reは正規表現（フォーマット）のライブラリでmatchメソッドは
+ファイル名key（変数）とpatternが合致するかどうかを確認する。
+
+変数matchに、合致すればmatchオブジェクトが、しなければNoneが入る
+
+正規表現もファイル名も区切り文字は-
+正規表現は--に囲まれた（）を一要素として扱う
+比較対象のファイル名は--に囲まれた間を（）としてみなす
+
+ファイル名を各要素ごとに抽出して変数に格納
+※S3の保存先のキーを作らなきゃいけない
+
+new_key = f'{year}/{month}/{day}/{book_name}.docx'
+
+-が/に置き換わる
+変数を各要素に充てる
+
+yearフォルダのmonthフォルダのdayフォルダのbook_nameファイル
+
+元ファイルをいじるときはtryブロックの中で
+
+sオブジェクトのcopy_objectメソッドで元ファイルをコピー
+copy_sourceをtarget_bucket_correctへ
+
+s3オブジェクトのdelete_objectメソッドで元ファイルを削除
+
+ログと戻り値※CloudWatchにログを残し、lambda関数に200を返す
+
+いつものexcept　raiseで強制終了
+
+else　※if matchに対する
+try:
+copy_objectメソッドでフォーマットが不正確な場合のバケットを指定
+delete_objectは同じ
+
+printもreturnもexceptも基本同じ
+
+初見のモジュールやメソッドがあるだけで実は単純
+
+
+

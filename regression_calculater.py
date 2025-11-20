@@ -4,11 +4,12 @@ import numpy as np
 from datetime import datetime
 from S3_common_load import S3_common_load 
 from S3_common_save import S3_common_save
+import os
 
-Y_S3_KEY = 'US_REAL_GDP_YOY_rate_2025-11-15.csv'
-X_S3_KEY = 'OutputGap_rate_2025-11-17 (2).csv'
+Y_S3_KEY = os.environ.get('Y_S3_KEY')
+X_S3_KEY = os.environ.get('X_S3_KEY')
 
-def run_s3_regression():
+def lambda_handler(event, content):
     print("S3からデータをロードするよ")
     
     try:
@@ -31,18 +32,15 @@ def run_s3_regression():
 
     model = sm.OLS(Y, X).fit()
 
-    print("\n--- S3データによる回帰分析結果 ---")
-    print(f"回帰式: GDP_YOY = {model.params['const']:.4f} + {model.params['OUTPUT_GAP']:.4f} * OUTPUT_GAP")
-    print(f"OUTPUT_GAPのP値: {model.pvalues['OUTPUT_GAP']:.4f}")
-    print(f"決定係数 (R-squared): {model.rsquared:.4f}")
-    print("----------------------------------")
+    print("単回帰分析に成功しました！")
+
+    regression_equation = (
+        f"GDP_YOY = {model.params['const']:.4f} + {model.params['OUTPUT_GAP']:.4f} * OUTPUT_GAP"
+    )
 
     summary_content = (
-        "\n--- S3データによる回帰分析結果 ---\n"
-        f"回帰式: GDP_YOY = {model.params['const']:.4f} + {model.params['OUTPUT_GAP']:.4f} * OUTPUT_GAP\n"
-        f"OUTPUT_GAPのP値: {model.pvalues['OUTPUT_GAP']:.4f}\n"
-        f"決定係数 (R-squared): {model.rsquared:.4f}\n"
-        "----------------------------------\n"
+        f"回帰式 : {regression_equation}\n"
+        f"決定係数 : {model.rsquared:.4f}"
     )
 
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -50,7 +48,4 @@ def run_s3_regression():
 
     S3_common_save(csv_string=summary_content, file_name=file_name)
     
-    print(f" 回帰分析サマリーをS3に保存完了。ファイル名: {file_name}")
-
-if __name__ == '__main__':
-    run_s3_regression()
+    print(f" 回帰分析サマリーをS3に保存完了！")
